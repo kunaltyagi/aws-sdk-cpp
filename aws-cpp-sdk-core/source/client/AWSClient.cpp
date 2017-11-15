@@ -414,6 +414,7 @@ void AWSClient::AddContentBodyToRequest(const std::shared_ptr<Aws::Http::HttpReq
     if (body && !httpRequest->HasHeader(Http::CONTENT_LENGTH_HEADER))
     {
         AWS_LOGSTREAM_TRACE(AWS_CLIENT_LOG_TAG, "Found body, but content-length has not been set, attempting to compute content-length");
+        body->clear();
         body->seekg(0, body->end);
         auto streamSize = body->tellg();
         body->seekg(0, body->beg);
